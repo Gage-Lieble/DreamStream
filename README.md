@@ -24,6 +24,19 @@ Data that the app will require
 - Password
 ## Schedule
 #### Week 1:
-- [ ] Tet
+MVP
+- [ ] Create movie title search function using ModelForm
+- [ ] Extract movie prices & services from the API
+- [ ] Disaplay the different prices and stream services
 #### Week 2:
+Extra
+- [ ] Create login & register system
+- [ ] Allow notifications based on price
+- [ ] Extract extra data such as HD/4K status, Trailer
+- [ ] Find similar movies and display on results
 #### Week 3:
+Finalizations
+- [ ] Begin styling 
+- [ ] Create app logo and image assests
+- [ ] Add popular movie titles to app home page
+- [ ] Deploy app
