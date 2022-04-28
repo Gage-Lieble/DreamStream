@@ -24,6 +24,6 @@ Data that the app will require
 - Password
 ## Schedule
 #### Week 1:
-- [ ]Tet
+- [ ] Tet
 #### Week 2:
 #### Week 3:
