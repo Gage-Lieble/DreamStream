@@ -9,7 +9,7 @@ There are many streaming services that stream thousands upon thousands of differ
 - Movie Title search
 - Streaming Service links (results)
 - Best price filter
-#### Aditional/Extra Features:
+#### Additional/Extra Features:
 - Notfications on price change
 - Account login/register
 - Display similar movies
