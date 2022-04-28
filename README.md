@@ -16,8 +16,9 @@ There are many streaming services that stream thousands upon thousands of differ
 - 4K or HD status tag
 - Movie trailer
 ## Data Model
-Data that the app will require
+Stored data that the app will require
 - Movie title
+- API movie details
 - :small_red_triangle_down:**For Account**:small_red_triangle_down:
 - Phone Number/Email
 - Username
