@@ -18,7 +18,7 @@ There are many streaming services that stream thousands upon thousands of differ
 ## Data Model
 Data that the app will require
 - Movie title
-- -----:small_red_triangle_down:**For Account**:small_red_triangle_down:-----
+- :small_red_triangle_down:**For Account**:small_red_triangle_down:
 - Phone Number/Email
 - Username
 - Password
