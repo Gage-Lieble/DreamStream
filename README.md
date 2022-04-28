@@ -8,11 +8,11 @@ There are many streaming services that stream thousands upon thousands of differ
 #### Base/Crucial Features:
 - Movie Title search
 - Streaming Service links (results)
-- Display similar movies
 - Best price filter
 #### Aditional/Extra Features:
 - Notfications on price change
 - Account login/register
+- Display similar movies
 - 4K or HD status tag
 - Movie trailer
 ## Data Model
