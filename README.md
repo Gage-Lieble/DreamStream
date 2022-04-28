@@ -16,7 +16,12 @@ There are many streaming services that stream thousands upon thousands of differ
 - 4K or HD status tag
 - Movie trailer
 ## Data Model
-
+Data that the app will require
+- Movie title
+- -----**For Account**-----
+- Phone Number/Email
+- Username
+- Password
 ## Schedule
 #### Week 1:
 #### Week 2:
