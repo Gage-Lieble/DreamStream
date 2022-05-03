@@ -12,7 +12,7 @@ def index(request):
     return render(request, 'search_dreamstream/index.html', context)
 
 def results(request):
-
+##
     if request.method == 'POST': 
         # Extracts info from api based on user input
         req = request.POST['search'].replace(' ','%20') # Removes spaces
