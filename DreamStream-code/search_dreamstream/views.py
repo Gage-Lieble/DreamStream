@@ -43,7 +43,7 @@ def results(request):
         price_filtered = sorted(list_link.items(), key=lambda t:t[1][1]) # Filters the price from lowest to highest
         list_link = dict(price_filtered)
 
-#dsfds
+
     context = {'details':details, 'sources': sources, 'allresults': all_results, 'links': list_link,}
     return render(request, 'search_dreamstream/results.html', context)
 
