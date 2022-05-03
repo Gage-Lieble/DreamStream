@@ -26,7 +26,7 @@ Stored data that the app will require
 ## Schedule
 #### Week 1:
 MVP
-- [ ] Create movie title search function using ModelForm
+- [x] Create movie title search function using ModelForm
 - [ ] Extract movie prices & services from the API
 - [ ] Disaplay the different prices and stream services
 #### Week 2:
