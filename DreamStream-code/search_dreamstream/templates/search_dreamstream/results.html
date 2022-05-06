@@ -5,17 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
+    <link rel="stylesheet" href="/static/search_dreamstream/css/style.css">
+    <link rel="stylesheet" href="/static/search_dreamstream/css/bootstrap.css">
 </head>
 <body>
-    <h1>LINKS:</h1>
 
-    
+    <div id="top-result">
+    <div id="poster-cont">
+        <img id="poster" src="{{poster}}" alt="movie-poster">
+       {% comment %}
+       <div id="rating-num"><p>{{rating}}&#9733;</p></div>
+       {% endcomment %}
+    </div>
+        <div id='best-link'>
+            <a href="#avaliable-cont">View Best Prices</a>
+        </div>
+    <a class="trailer" href="{{trailer}}">Watch Trailer</a>
+    <div id="overview-cont">
+    <h2>{{title}}</h2>
+    <p>+ Add to favorites</p>
+    <p class="description">{{description}}</p>
+    <p>Released: {{release}}</p>
+    </div>
+    <div id="avaliable-cont">
+    <h3>Avaliable At</h3> <p>best price <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+      </svg></p>
     {% for key, value in links.items %}
-    <div>
-        <a href="{{key}}">{{value.0}}, {{value.1}}</a>
+    <div class="service-links">
+        <a href="{{key}}">{{value.0}}, {{value.1}}. {{value.2}}</a>
     </div>
     {% endfor %}
-        
-    
+    </div>
+    </div>
+    <a href="{% url 'search_app:index'  %}">Home</a>
 </body>
 </html>

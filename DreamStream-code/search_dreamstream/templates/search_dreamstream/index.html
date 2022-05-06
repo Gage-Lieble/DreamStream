@@ -9,7 +9,7 @@
 <body>
     <h1>Search movie</h1>
 
-    <form action="{% url 'results' %}" method="POST">
+    <form action="{% url 'search_app:results' %}" method="POST">
         {% csrf_token %} {{form}} 
         <button type="submit">Search</button>
     </form>
