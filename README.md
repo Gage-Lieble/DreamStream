@@ -34,7 +34,7 @@ Extra
 - [ ] Create login & register system
 - [ ] Create function to add to favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
-- [ ] Find similar movies and display on results
+- [x] Find similar movies and display on results
 #### Week 3:
 Finalizations
 - [ ] Begin styling 
