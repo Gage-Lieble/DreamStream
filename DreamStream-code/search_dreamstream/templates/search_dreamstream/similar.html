@@ -31,38 +31,13 @@
     <h3><span>Avaliable At</span></h3> <p>best price <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
         <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
       </svg></p>
-      <div class="link-cont">
     {% for key, value in links.items %}
-    
-        <a class="service-links" href="{{key}}">{{value.0}} &#129170;</a>
-        <div id="price-quality-cont">
-        <div>
-        <div class="link-price">{{value.1}}</div> <div class="quality-{{value.2}}">{{value.2}}</div>
+    <div class="link-cont">
+        <a class="service-links" href="{{key}}">{{value.0}}, {{value.1}}</a> <div class="quality-{{value.2}}">{{value.2}}</div>
     </div>
-    </div>
-    
     {% endfor %}
-</div>
     </div>
     </div>
-
-{% if similarresults|length > 0 %}
-    <div id="similar-cont">
-        <h2>Similar Titles</h2>
-
-    {% for key, value in similarresults.items %}
-        <div class="similar-results">
-            <a href="{% url 'search_app:similar_results' sim=key %}"><img src="{{value}}" alt=""></a>
-            <a class="sim-link" href="{% url 'search_app:similar_results' sim=key %}">{{key}} &#129170;</a>
-        </div>
-    {% endfor %}
-        
-
-
-    </div>
-{% endif %}
-    
-    
-    <a href="{% url 'search_app:index' %}">Home</a>
+    <a href="{% url 'search_app:index'  %}">Home</a>
 </body>
 </html>
