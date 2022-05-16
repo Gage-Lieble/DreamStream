@@ -10,16 +10,16 @@ def index(request):
     return render(request, 'search_dreamstream/index.html', context)
 
 def results(request):
-##
+
     if request.method == 'POST': 
         # Extracts info from api based on user input
         req = request.POST['search'].replace(' ','%20') # Removes spaces
-        form_title = f"https://api.watchmode.com/v1/search/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH&search_field=name&search_value={req}" # Access the movie titles ID
+        form_title = f"https://api.watchmode.com/v1/autocomplete-search/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz&search_value={req}" # Access the movie titles ID
         with urllib.request.urlopen(form_title) as url:
             title = json.loads(url.read().decode()) # Converts the title to ID number
-        title_detail = f"https://api.watchmode.com/v1/title/{title['title_results'][0]['id']}/details/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH" # Returns single result The [0] changes which movie to select
-        title_sources = f"https://api.watchmode.com/v1/title/{title['title_results'][0]['id']}/sources/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH"
-        all_results = f"https://api.watchmode.com/v1/title/{title}/details/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH" # NOT NEEDED
+        title_detail = f"https://api.watchmode.com/v1/title/{title['results'][0]['id']}/details/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz" # Returns single result The [0] changes which movie to select
+        title_sources = f"https://api.watchmode.com/v1/title/{title['results'][0]['id']}/sources/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz"
+        all_results = f"https://api.watchmode.com/v1/title/{title}/details/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz" # NOT NEEDED
         with urllib.request.urlopen(title_detail) as url:
             details = json.loads(url.read().decode())
         with urllib.request.urlopen(title_sources) as url:
@@ -53,10 +53,13 @@ def results(request):
         # Similar Titles
         similar_results = {}
         result_counter = 1
-        while result_counter < len(title['title_results']):
-            similar_search = f"https://api.watchmode.com/v1/title/{title['title_results'][result_counter]['id']}/details/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH"
-            with urllib.request.urlopen(similar_search) as url:
-                    details_similar = json.loads(url.read().decode())
+        while result_counter < len(title['results']):
+            try:
+                similar_search = f"https://api.watchmode.com/v1/title/{title['results'][result_counter]['id']}/details/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz"
+                with urllib.request.urlopen(similar_search) as url:
+                        details_similar = json.loads(url.read().decode())
+            except: 
+                pass
             similar_title = details_similar['title']
             similar_poster = details_similar['poster']
             result_counter += 1
@@ -84,13 +87,13 @@ def results(request):
 def similar_results(request, sim):
 
         req = sim.replace(' ','%20') # Removes spaces
-        form_title = f"https://api.watchmode.com/v1/autocomplete-search/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH&search_value={req}" # Access the movie titles ID
+        form_title = f"https://api.watchmode.com/v1/autocomplete-search/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz&search_value={req}" # Access the movie titles ID
         with urllib.request.urlopen(form_title) as url:
             title = json.loads(url.read().decode()) # Converts the title to ID number
         
-        title_detail = f"https://api.watchmode.com/v1/title/{title['title_results'][0]['id']}/details/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH" # Returns single result The [0] changes which movie to select
-        title_sources = f"https://api.watchmode.com/v1/title/{title['title_results'][0]['id']}/sources/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH"
-        all_results = f"https://api.watchmode.com/v1/title/{title}/details/?apiKey=4HtxbZ3jYTQDph06miqguyFFmFxPk0yLusYXHcDH" # NOT NEEDED
+        title_detail = f"https://api.watchmode.com/v1/title/{title['results'][0]['id']}/details/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz" # Returns single result The [0] changes which movie to select
+        title_sources = f"https://api.watchmode.com/v1/title/{title['results'][0]['id']}/sources/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz"
+        all_results = f"https://api.watchmode.com/v1/title/{title}/details/?apiKey=nCOLngErkKOjuk4kKLP49K4OUcEuK6o3qOt6Efyz" # NOT NEEDED
         with urllib.request.urlopen(title_detail) as url:
             details = json.loads(url.read().decode())
         with urllib.request.urlopen(title_sources) as url:
@@ -112,7 +115,7 @@ def similar_results(request, sim):
                     list_link[links] = [name.title() , f'${float(price)}', quality]
         price_filtered = sorted(list_link.items(), key=lambda t:t[1][1])# Filters the price from lowest to highest
         list_link = dict(price_filtered)
-        
+    
         # Movie details - title, desc
         title_name = details['title'] # Stores title
         poster = details['poster'] # Cover poster
@@ -134,7 +137,3 @@ def similar_results(request, sim):
             'release': release_date,
             }
         return render(request, 'search_dreamstream/similar.html', context)
-
-
-
-

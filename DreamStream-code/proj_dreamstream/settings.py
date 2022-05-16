@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My apps
-    'search_dreamstream'
+    'search_dreamstream',
+    'user_dreamstream'
 ]
 
 MIDDLEWARE = [

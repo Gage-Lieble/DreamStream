@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <link rel="stylesheet" href="{% static 'search_dreamstream/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'search_dreamstream/css/bootstrap.css' %}">
 </head>
 <body>
+    <div id="nav-cont">
+        <div class="brand-logo"><img class="brand-img" src="{% static 'search_dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="nav-links">
+            <a href="{% url 'dream_users:login' %}"><img class="profile-img" src="{% static 'search_dreamstream/images/profile_icon.svg' %}" alt="">
+            </a><a href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'search_dreamstream/images/search_icon.svg' %}" alt=""></a>
+        </div>
+    </div>
     <h1>Search movie</h1>
 
     <form action="{% url 'search_app:results' %}" method="POST">
