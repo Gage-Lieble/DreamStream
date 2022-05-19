@@ -31,7 +31,7 @@ MVP
 - [x] Disaplay the different prices and stream services
 #### Week 2:
 Extra
-- [ ] Create login & register system
+- [x] Create login & register system
 - [ ] Create function to add to favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
 - [x] Find similar movies and display on results
