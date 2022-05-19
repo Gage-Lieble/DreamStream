@@ -6,13 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="{% static 'user_dreamstream/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'search_dreamstream/css/bootstrap.css' %}">
 </head>
 <body>
+    <div id="nav-cont">
+        <div class="brand-logo"><img class="brand-img" src="{% static 'search_dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="content-cont">
+
+            {% if usern == 'AnonymousUser' %}
+            <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
+
+                {% else %}
+                <div class="username-nav">{{request.user}}</div>
+            {% endif %}
+                
+        <div class="nav-links">
+            <a href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'search_dreamstream/images/profile_icon.svg' %}" alt="">
+            </a><a href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'search_dreamstream/images/search_icon.svg' %}" alt=""></a>
+        </div>
+    </div>
+    </div>
     <form action="" method="POST">
         {% csrf_token %} {{ log_form }}
-        <button type="submit">Login</button>
+        <button type="submit">Login &#129170;</button>
     </form>
-
-    <p>If you don't have an account</p><a href="{% url 'dream_users:signup' %}">Sign up</a>
+    <div id="signup-cont">
+    <p class="noacct-p">No account?</p> <a href="{% url 'dream_users:signup' %}">Sign up &#129170;</a>
+</div>
 </body>
 </html>

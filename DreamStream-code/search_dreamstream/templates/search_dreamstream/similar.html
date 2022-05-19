@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static%}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,10 +11,26 @@
 </head>
 
 <body>
+    <div id="nav-cont">
+        <div class="brand-logo"><img class="brand-img" src="{% static 'search_dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="content-cont">
 
+            {% if usern == 'AnonymousUser' %}
+            <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
+
+                {% else %}
+                <div class="username-nav">{{request.user}}</div>
+            {% endif %}
+                
+        <div class="nav-links">
+            <a href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'search_dreamstream/images/profile_icon.svg' %}" alt="">
+            </a><a href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'search_dreamstream/images/search_icon.svg' %}" alt=""></a>
+        </div>
+    </div>
+    </div>
     <div id="top-result">
         <div id="poster-cont">
-            <img id="poster" src="{{poster}}" alt="movie-poster"> {% comment %}
+            <img id="poster" src="https://cdn.watchmode.com/posters/{{poster}}" alt="movie-poster"> {% comment %}
             <div id="rating-num">
                 <p>{{rating}}&#9733;</p>
             </div>
@@ -26,7 +42,9 @@
         <a class="trailer" href="{{trailer}}">Watch Trailer</a>
         <div id="overview-cont">
             <h2>{{title}}</h2>
-            <p>+ Add to favorites</p>
+            {% if usern != 'AnonymousUser' %}
+                <a href="{% url 'dream_users:add_fav' fav=title posterimg=poster %}">+ Add to favorites</a>
+            {% endif %}
             <p class="description">{{description}}</p>
             <p>Released: {{release}}</p>
         </div>
@@ -57,7 +75,6 @@
     </div>
     {% endif %}
     </div>
-    <a href="{% url 'search_app:index'  %}">Home</a>
 </body>
 
 </html>

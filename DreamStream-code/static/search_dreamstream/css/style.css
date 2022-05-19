@@ -4,6 +4,11 @@ body {
     align-items: center;
     background-color: rgb(38, 38, 38) !important;
     color: white !important;
+    font-family: 'futura' !important;
+}
+
+label{
+    visibility: hidden !important;
 }
 
 #top-result {
@@ -19,7 +24,7 @@ body {
 /* Links */
 
 #best-link {
-    background-color: #00dc89;
+    background-color: #4ea8de;
     padding: 13px;
     border-radius: 100px;
     margin: 25px 0px 10px 0px;
@@ -30,7 +35,7 @@ body {
 }
 
 #best-link:hover {
-    background-color: #01ba73 !important;
+    background-color: #3d84b0 !important;
 }
 
 .link-cont {
@@ -42,7 +47,7 @@ body {
 }
 
 .service-links {
-    background-color: #00dc89;
+    background-color: #4ea8de;
     padding: 10px;
     color: white;
     border-radius: 100px;
@@ -59,13 +64,13 @@ body {
 }
 
 .quality-HD {
-    background-color: #286c4e;
+    background-color: #0b7fc8;
     padding: 10px;
     display: inline;
 }
 
 .quality-SD {
-    background-color: #6ab972;
+    background-color: #8dc7eb;
     padding: 10px;
     display: inline;
 }
@@ -107,7 +112,7 @@ body {
     position: absolute;
     bottom: 15px;
     right: 0px;
-    background-color: #00dc89;
+    background-color: #4ea8de;
     padding: 3px 5px 3px 10px;
     
 }
@@ -125,6 +130,7 @@ body {
 }
 #overview-cont>h2{
     text-align: center;
+    
 }
 .description {
     text-align: center;
@@ -134,7 +140,7 @@ body {
 
 #avaliable-cont {
     margin-top: 50px;
-    border: 4px solid #00dc89;
+    border: 4px solid #4ea8de;
     border-radius: 25px;
     padding: 25px;
 }
@@ -175,6 +181,11 @@ body {
     background-color: rgb(32, 32, 32);
 }
 
+.content-cont{
+    display: flex;
+    align-items: center;
+}
+
 .nav-links{
     width: 100px;
     display: flex;
@@ -193,4 +204,71 @@ body {
 
 .search-img{
     width: 35px;
+}
+
+.username-nav{
+    margin-right: 15px;
+}
+
+/* INDEX */
+
+#search-cont{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#search-cont>form{
+    display: flex;
+    flex-direction: column;
+    width:75%;
+}
+#search-cont>form>input{
+    border-radius: 25px;
+    border: 2px solid white;
+    padding: 8px;
+    margin: 0 auto;
+    width: 95%;
+}
+
+#search-cont>form>button{
+    background-color: #4ea8de;
+    padding: 7px;
+    border: none;
+    border-radius: 100px;
+    width: 60%;
+    color: white;
+    margin-top: 25px;
+    margin: 25px auto;
+}
+
+#search-cont>form>label{
+    visibility: hidden;
+}
+#search-cont>h1{
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font-family: 'rounded';
+    letter-spacing: 2px;
+    font-size: 40px;
+}
+
+
+/* FEATURED */
+#featured-cont{
+    margin-top: 50px;
+}
+
+
+/* FONTS */
+
+@font-face {
+    font-family: 'rounded';
+    src: url(Rounded.otf);
+}
+
+
+@font-face {
+    font-family: 'futura';
+    src: url(futura.ttf);
 }

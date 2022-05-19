@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'search_dreamstream/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'search_dreamstream/css/bootstrap.css' %}">
 </head>
 <body>
+    <div id="nav-cont">
+        <div class="brand-logo"><img class="brand-img" src="{% static 'search_dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="content-cont">
+
+            {% if usern == 'AnonymousUser' %}
+            <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
+
+                {% else %}
+                <div class="username-nav">{{request.user}}</div>
+            {% endif %}
+                
+        <div class="nav-links">
+            <a href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'search_dreamstream/images/profile_icon.svg' %}" alt="">
+            </a><a href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'search_dreamstream/images/search_icon.svg' %}" alt=""></a>
+        </div>
+    </div>
+    </div>
     <h2>Welcome {{request.user}}</h2>
+    <a href="{% url 'dream_users:logout' %}">Logout</a>
+<h2>Your Favorites</h2>
+{% for fav in favs  %}
+<a href="{% url 'search_app:similar_results' sim=fav.title %}"><img src="{{fav.poster_img}}" alt=""></a><a class="sim-link" href="{% url 'search_app:similar_results' sim=fav.title %}">{{fav.title}} &#129170;</a>
+{% endfor %}
+    
+   
+   
 </body>
 </html>

@@ -12,16 +12,32 @@
 <body>
     <div id="nav-cont">
         <div class="brand-logo"><img class="brand-img" src="{% static 'search_dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="content-cont">
+
+            {% if usern == 'AnonymousUser' %}
+            <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
+
+                {% else %}
+                <div class="username-nav">{{request.user}}</div>
+            {% endif %}
+                
         <div class="nav-links">
-            <a href="{% url 'dream_users:login' %}"><img class="profile-img" src="{% static 'search_dreamstream/images/profile_icon.svg' %}" alt="">
+            <a href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'search_dreamstream/images/profile_icon.svg' %}" alt="">
             </a><a href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'search_dreamstream/images/search_icon.svg' %}" alt=""></a>
         </div>
     </div>
-    <h1>Search movie</h1>
-
+    </div>
+    
+    <div id="search-cont">
+        <h1>Dream Stream</h1>
     <form action="{% url 'search_app:results' %}" method="POST">
         {% csrf_token %} {{form}} 
-        <button type="submit">Search</button>
+        <button type="submit">Search &#129170;</button>
     </form>
+
+    <div id="featured-cont">
+        <h1>Featured Content</h1>
+    </div>
+</div>
 </body>
 </html>

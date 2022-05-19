@@ -1,3 +1,4 @@
+from turtle import title
 from django.shortcuts import render
 from .forms import *
 from django.urls import reverse
@@ -9,11 +10,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 
+
 def signup(request):
    # Displays before form input
     if request.method == 'GET':
         form = SignUpForm()
-        context = {'form': form}
+        usern = request.user
+        context = {'form': form, 'usern': str(usern)}
         return render(request, 'user_dreamstream/signup.html', context)
     # Creates a new User
     elif request.method == 'POST':
@@ -26,10 +29,11 @@ def signup(request):
                 password = form.cleaned_data['password'],
                 email = form.cleaned_data['email'],
             )
-        return HttpResponseRedirect(reverse('dream_users:signup'))
+        return HttpResponseRedirect(reverse('dream_users:login'))
 def user_login(request):
     if request.method == 'GET':
-        context = {'log_form': LoginForm()}
+        usern = request.user
+        context = {'log_form': LoginForm(), 'usern': str(usern)}
         return render(request, 'user_dreamstream/login.html', context)
     elif request.method == 'POST':
         log_form = LoginForm(request.POST)
@@ -44,14 +48,39 @@ def user_login(request):
                 return render(request, 'user_dreamstream/login.html', {'log_form': log_form})
             
 
-@login_required
-def profile(request):
-    return render(request, 'user_dreamstream/profile.html')
 
-    
+
+
+
+
+
+
+
+def profile(request):
+    if str(request.user) == 'AnonymousUser': # Checks if the user is logged in
+        return HttpResponseRedirect(reverse('dream_users:login'))
+    else:
+        
+        fav_movies = FavMovies.objects.all().filter(fav_user=request.user)
+
+        usern = request.user
+        context = {'usern': str(usern), 'favs': fav_movies}
+        return render(request, 'user_dreamstream/profile.html', context)
+
+
+
+
+
+
+
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('dream_users:login'))
 
 
-# def user_logout(request)
+def add_fav(request, fav, posterimg):
+    
+    form = FavMovies(fav_user=request.user, title=fav, poster_img='https://cdn.watchmode.com/posters/'+posterimg)
+    form.save()
+    return HttpResponseRedirect(reverse('dream_users:profile'))
+
