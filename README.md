@@ -41,5 +41,5 @@ Extra
 Finalizations
 - [x] Begin styling 
 - [x] Create app logo and image assests
-- [ ] Add popular movie titles to app home page
+- [x] Add popular movie titles to app home page
 - [ ] Deploy app
