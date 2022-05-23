@@ -29,13 +29,13 @@ MVP
 - [x] Create movie title search function using ModelForm
 - [x] Extract movie prices & services from the API
 - [x] Disaplay the different prices and stream services
+- [x] Find similar movies and display on results
 #### Week 2:
 Extra
 - [x] Create login & register system
 - [x] Create function to add to favorites list
 - [ ] Allow user to remove from favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
-- [x] Find similar movies and display on results
 - [ ] Add bio section to profile page
 - [ ] Add custom PFP to profile page
 #### Week 3:
