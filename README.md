@@ -42,4 +42,5 @@ Finalizations
 - [x] Begin styling 
 - [x] Create app logo and image assests
 - [x] Add popular movie titles to app home page
+- [ ] Footer
 - [ ] Deploy app
