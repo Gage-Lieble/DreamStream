@@ -33,6 +33,7 @@ MVP
 Extra
 - [x] Create login & register system
 - [x] Create function to add to favorites list
+- [ ] Allow user to remove from favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
 - [x] Find similar movies and display on results
 - [ ] Add bio section to profile page
