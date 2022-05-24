@@ -20,7 +20,6 @@ Stored data that the app will require
 - Movie title
 - API movie details
 - :small_red_triangle_down:**For Account**:small_red_triangle_down:
-- Email
 - Username
 - Password
 ## Schedule
