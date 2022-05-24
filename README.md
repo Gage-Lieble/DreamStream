@@ -34,7 +34,7 @@ MVP
 Extra
 - [x] Create login & register system
 - [x] Create function to add to favorites list
-- [ ] Allow user to remove from favorites list
+- [x] Allow user to remove from favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
 - [ ] Add bio section to profile page
 - [ ] Add custom PFP to profile page
