@@ -84,3 +84,8 @@ def add_fav(request, fav, posterimg):
     form.save()
     return HttpResponseRedirect(reverse('dream_users:profile'))
 
+def delete_fav(request, fav_id):
+    if FavMovies.objects.filter(id=fav_id).exists():
+        favorite = FavMovies.objects.get(id=fav_id)
+        favorite.delete()
+    return HttpResponseRedirect(reverse('dream_users:profile'))
