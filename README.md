@@ -29,15 +29,20 @@ MVP
 - [x] Create movie title search function using ModelForm
 - [x] Extract movie prices & services from the API
 - [x] Disaplay the different prices and stream services
+- [x] Find similar movies and display on results
 #### Week 2:
 Extra
 - [x] Create login & register system
-- [ ] Create function to add to favorites list
+- [x] Create function to add to favorites list
+- [x] Allow user to remove from favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
-- [x] Find similar movies and display on results
+- [ ] Add bio section to profile page
+- [ ] Add custom PFP to profile page
 #### Week 3:
 Finalizations
-- [ ] Begin styling 
-- [ ] Create app logo and image assests
-- [ ] Add popular movie titles to app home page
+- [x] Begin styling 
+- [x] Create app logo and image assests
+- [x] Add popular movie titles to app home page
+- [x] Footer
+- [ ] Desktop responsive
 - [ ] Deploy app
