@@ -11,11 +11,11 @@
 </head>
 <body>
     <div id="nav-cont">
-        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
         <div class="content-cont">
 
             {% if usern == 'AnonymousUser' %}
-                <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
+            <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
 
                 {% else %}
                 <div class="username-nav">{{request.user}}</div>

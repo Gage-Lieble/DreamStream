@@ -3,3 +3,4 @@ from .models import *
 
 
 admin.site.register(FavMovies)
+admin.site.register(ProfileDetails)

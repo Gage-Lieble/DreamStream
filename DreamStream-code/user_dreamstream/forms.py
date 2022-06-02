@@ -12,3 +12,10 @@ class SignUpForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username', max_length=20, widget=forms.TextInput(attrs={'placeholder': ' Your Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': ' Your Password'}), label='Password', max_length=10,)
+
+class ChangePfpForm(ModelForm):
+    class Meta:
+        model = ProfileDetails
+        fields = ['profile_pic']
+        
+       

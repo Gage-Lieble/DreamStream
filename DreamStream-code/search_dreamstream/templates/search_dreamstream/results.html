@@ -13,7 +13,7 @@
 <body>
  
     <div id="nav-cont">
-        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
         <div class="content-cont">
 
             {% if usern == 'AnonymousUser' %}
@@ -29,18 +29,23 @@
         </div>
     </div>
     </div>
+    <section id="top-section">
     <div id="top-result">
         <div id="poster-cont">
             <img id="poster" src="https://cdn.watchmode.com/posters/{{poster}}" alt="movie-poster">
-            <div id="rating-num">
-                <p>{{rating}}&#9733;</p>
-            </div>
-            
+           
+           
+           <div id="rating-num">
+            <p>{{rating}}&#9733;</p>
         </div>
-
-        <a id="best-link" href="#avaliable-cont">View Best Prices</a>
+           
+                
+            <a id="best-link" href="#avaliable-cont">View Best Prices</a>
 
         <a class="trailer" href="{{trailer}}">Watch Trailer</a>
+        </div>
+
+        
         <div id="overview-cont">
                 <h2>{{title}}</h2>
             
@@ -52,7 +57,7 @@
             <p class="description">{{description|slice:"400"}}...</p>
             <p>Released: {{release}}</p>
         </div>
-
+    </section>
 
         {% if links|length > 0 %}
         <div id="avaliable-cont">
@@ -63,8 +68,9 @@
             <div class="link-cont">
                 {% for key, value in links.items %}
 
-                <a class="service-links" href="{{key}}">{{value.0}} &#129170;</a>
+                
                 <div id="price-quality-cont">
+                    <a class="service-links" href="{{key}}">{{value.0|slice:'15'}} &#129170;</a>
                     <div>
                         <div class="link-price">{{value.1}}</div>
                         <div class="quality-{{value.2}}">{{value.2}}</div>
@@ -74,42 +80,54 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
+    
+
     {% else %}
     <div id="avaliable-cont">
         <h3><span>Not Avaliable online</span></h3>
     </div>
     {% endif %} {% if similarresults|length > 0 %}
-    <div id="similar-cont">
-        <h2>Similar Titles</h2>
 
-        {% for key, value in similarresults.items %}
-        <div class="similar-results">
-            <a href="{% url 'search_app:similar_results' sim=key %}"><img src="{{value}}" alt=""></a>
-            <a class="sim-link" href="{% url 'search_app:similar_results' sim=key %}">{{key}} &#129170;</a>
-        </div>
-        {% endfor %}
+    
+
+<h2 class="similar-header">Similar Titles</h2>
+<div id="similar-cont">
+    
+
+    {% for key, value in similarresults.items %}
+    <div class="similar-results">
+        <a href="{% url 'search_app:similar_results' sim=key %}"><img src="{{value}}" alt=""></a>
+        <a class="sim-link" href="{% url 'search_app:similar_results' sim=key %}">{{key}} &#129170;</a>
     </div>
-    {% endif %}
-   
-    <div id="footer-cont">
-        <p class="copy-write">&copy; 2022 | GageLieble.Com</p>
-        <div id="desc-links">
-        
-        <div id="nav-foot-cont">
-        <a href="{% url 'dream_users:profile' %}"><img src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="" width="25px" height="25px"> <p>Profile</p></a>
-        <a href="{% url 'search_app:index' %}"><img src="{% static 'dreamstream/images/search_icon.svg' %}" alt="" width="25px" height="25px"> <p>Search</p></a>
-    </div>
-    <div id="foot-desc">
-        <p><b>Dream stream</b> is a web app created by Gage Lieble. This project was assigned for my Pdx Code Guild's Capstone final. For more info check out my Github below! </p>
-    </div>
-    </div>
-    <div id="socials">
-        <a href="https://www.linkedin.com/in/gage-lieble-954076229/"><img src="{% static 'dreamstream/images/linkedin.svg' %}" alt="" width="50px" height="50px"></a>
-        <a href="https://www.gagelieble.com/"><img src="{% static 'dreamstream/images/webpage.svg' %}" alt="" width="50px" height="50px"></a>
-        <a href="https://github.com/Gage-Lieble"><img src="{% static 'dreamstream/images/github.svg' %}" alt="" width="50px" height="50px"></a>
-    </div>
-    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+</div>
+
+
+
+<div id="footer-cont">
+    <p class="copy-write">&copy; 2022 | <a href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
+    <div id="desc-links">
+    
+    <div id="nav-foot-cont">
+    <a href="{% url 'dream_users:profile' %}"><img src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="" width="25px" height="25px"> <p>Profile</p></a>
+    <a href="{% url 'search_app:index' %}"><img src="{% static 'dreamstream/images/search_icon.svg' %}" alt="" width="25px" height="25px"> <p>Search</p></a>
+</div>
+<div id="foot-desc">
+    <p><b>Dream stream</b> is a web app created by me, Gage Lieble. This django app was assigned by Pdx Code Guild as my final capstone project. For more info check out my Github below! </p>
+</div>
+</div>
+<div id="socials">
+    <a href="https://www.linkedin.com/in/gage-lieble-954076229/"><img src="{% static 'dreamstream/images/linkedin.svg' %}" alt="" width="50px" height="50px"></a>
+    <a href="https://www.gagelieble.com/"><img src="{% static 'dreamstream/images/webpage.svg' %}" alt="" width="50px" height="50px"></a>
+    <a href="https://github.com/Gage-Lieble"><img src="{% static 'dreamstream/images/github.svg' %}" alt="" width="50px" height="50px"></a>
+</div>
+</div>
+
+
 </body>
 
 </html>

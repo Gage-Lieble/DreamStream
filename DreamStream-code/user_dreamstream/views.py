@@ -29,6 +29,7 @@ def signup(request):
                 password = form.cleaned_data['password'],
                 email = form.cleaned_data['email'],
             )
+
         return HttpResponseRedirect(reverse('dream_users:login'))
 def user_login(request):
     if request.method == 'GET':
@@ -47,41 +48,45 @@ def user_login(request):
                 log_form.add_error('username', 'Invalid email or password')
                 return render(request, 'user_dreamstream/login.html', {'log_form': log_form})
             
-
-
-
-
-
-
-
-
-
 def profile(request):
     if str(request.user) == 'AnonymousUser': # Checks if the user is logged in
         return HttpResponseRedirect(reverse('dream_users:login'))
     else:
         
         fav_movies = FavMovies.objects.all().filter(fav_user=request.user)
-
+        num_favs = len(list(fav_movies))
         usern = request.user
-        context = {'usern': str(usern), 'favs': fav_movies}
+        context = {'usern': str(usern), 'favs': fav_movies, 'numfav': num_favs}
         return render(request, 'user_dreamstream/profile.html', context)
 
 
+def profile_settings(request):
+    
+    form = ChangePfpForm(instance=request.user)
+    context = {'changeform': form}
+
+    if request.method == "POST":
+        form = ChangePfpForm(request.POST, request.FILES ,instance=request.user)
+        
+        if form.is_valid():
+    
+            form.save()
+            return HttpResponseRedirect(reverse('dream_users:profile'))
+    return render(request, 'user_dreamstream/settings.html', context)
 
 
-
-
-
+    
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('dream_users:login'))
 
 
 def add_fav(request, fav, posterimg):
+    favmovs = FavMovies.objects.all().filter(fav_user=request.user)
     
-    form = FavMovies(fav_user=request.user, title=fav, poster_img='https://cdn.watchmode.com/posters/'+posterimg)
-    form.save()
+    if fav not in str(favmovs):
+        form = FavMovies(fav_user=request.user, title=fav, poster_img='https://cdn.watchmode.com/posters/'+posterimg)
+        form.save()
     return HttpResponseRedirect(reverse('dream_users:profile'))
 
 def delete_fav(request, fav_id):

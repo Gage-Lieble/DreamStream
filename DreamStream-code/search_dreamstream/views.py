@@ -4,22 +4,9 @@ import urllib.request
 import json
 from .forms import *
 
-api_key = "mrIdo9DBvC2adtcWa3121mZUZiAAiCN2ie26jDpW"
+api_key = "dkJV4h2niaA6GWneuYmuPQ4muLenJgV62eLkI4c2"
 def index(request):
 
-    # Movies featured 
-    '''
-    -The Batman id:1532981
-    -Firestarter  id:1520965
-    -Spiderman no way home  id:1589918
-    -Us id:1452255
-    -Step brothers  id:1360238
-    -Dude wheres my car  id:1112123
-    -Pet cemetary id:1299858
-    -Star Wars: The Rise of Skywalker  id:1359294
-    -Free Guy  id:1534152
-    -Conjuring id:1495244
-    '''
     featured_movies_list = ['The%20Batman', 'Firestarter', 'Spiderman%20no%20way%20home', 'Us', 'Step%20brothers', 'Dude%20wheres%20my%20car', 'Pet%20sematary', 'Star%20Wars:%20The%20Rise%20of%20Skywalker', 'Free%20Guy', 'Conjuring']
     featured_dict = {}
     for items in featured_movies_list:
@@ -60,7 +47,7 @@ def results(request):
             quality = sources[index]['format']
             index += 1
             if price == None: # Removes 'none' from values and replaces with 'subscription'
-                    price = 'Subscription'
+                    price = 'Subs'
                     list_link[links] = [name.title() , price, quality]
             if links not in list_link:
                     list_link[links] = [name.title() , f'${float(price)}', quality]
@@ -135,7 +122,7 @@ def similar_results(request, sim):
             quality = sources[index]['format']
             index += 1
             if price == None: # Removes 'none' from values and replaces with 'subscription'
-                    price = 'Subscription'
+                    price = 'Subs'
                     list_link[links] = [name.title() , price, quality]
             if links not in list_link:
                     list_link[links] = [name.title() , f'${float(price)}', quality]
@@ -164,3 +151,5 @@ def similar_results(request, sim):
             'usern': str(usern)
             }
         return render(request, 'search_dreamstream/similar.html', context)
+
+

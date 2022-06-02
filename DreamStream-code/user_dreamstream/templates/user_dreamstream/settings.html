@@ -27,14 +27,12 @@
         </div>
     </div>
     </div>
+    
     <div id="form-cont">
-    <form action="" method="POST">
-        {% csrf_token %} {{ log_form }}
-        <button type="submit">Login &#129170;</button>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {{ changeform }}
+        <button type="submit">Apply &#129170;</button>
     </form>
-</div>
-    <div id="signup-cont">
-    <p class="noacct-p">No account?</p> <a href="{% url 'dream_users:signup' %}">Sign up &#129170;</a>
 </div>
 
 

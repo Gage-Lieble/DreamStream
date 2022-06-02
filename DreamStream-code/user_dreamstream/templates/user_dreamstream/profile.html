@@ -11,9 +11,16 @@
 </head>
 <body>
     <div id="nav-cont">
-        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""></div>
+        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
         <div class="content-cont">
+
+            {% if usern == 'AnonymousUser' %}
+            <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
+
+                {% else %}
                 <div class="username-nav">{{request.user}}</div>
+            {% endif %}
+                
         <div class="nav-links">
             <a href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
             </a><a href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
@@ -26,26 +33,46 @@
 
 
 <div id="body-cont">
-    <div id="pfp-cont"></div>
-
+    <section id="profile-section">
     <div id="down-name">
-    <h1>Hey, {{request.user}}!</h1>
-    
-    
-
-    
-    {% comment %}
-    <div id="top-content">
-    <div class="down-arrow-cont">
-        <a href="#favs-links">Your Favs</a>
-        <a href="#favs-links"><img src="{% static 'dreamstream/images/downarrow.svg' %}" alt=""></a>
+        <h1>Hey, {{request.user}}!</h1>
+        <div id="pfp-cont"><img id="pfp-image" src="{{ request.user.profiledetails.profile_pic.url }}" alt=""></div>
     </div>
-</div>
-    {% endcomment %}
+    <div id="profile-info">
+        <div class="fav-amount">
+            {{numfav}} 
+            <h1>Favs</h1> 
+        </div>
+        <div class="your-name">
+            
+            {% if request.user.first_name == '' %}
+                {{request.user}}
+            
+                {% else %}
+            {{request.user.first_name}}
+            <h1>{{request.user.last_name}}</h1>
+            {% endif %}
+        </div>
+        <a class='profile-logout' href="{% url 'dream_users:logout' %}">Logout &#129170;</a>
+        <a class="fav-arrow" href="#favorites-title">
         
+            <p>To Favs</p>
+            <img src="{% static 'dreamstream/images/downarrow.svg' %}" width="100"alt="">
+        
+    </a>
+    </div>
+    
+</section>
+<h1 id="favorites-title">Your Favorites</h1>
 
-</div>
-<h1>Your Favorites</h1>
+
+{% if numfav == 0 %}
+    <div class="fav-none">
+        0
+        <h1>Favs</h1> 
+    </div>
+{% endif %}
+    
 <div id="favorites-cont">
 {% for fav in favs  %}
 <div class="favorite-poster-cont">
@@ -57,9 +84,9 @@
 {% endfor %}
 </div>
 </div>
-<a href="{% url 'dream_users:logout' %}">Logout</a>
+
 <div id="footer-cont">
-    <p class="copy-write">&copy; 2022 | GageLieble.Com</p>
+    <p class="copy-write">&copy; 2022 | <a href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
     <div id="desc-links">
     
     <div id="nav-foot-cont">
@@ -67,7 +94,7 @@
     <a href="{% url 'search_app:index' %}"><img src="{% static 'dreamstream/images/search_icon.svg' %}" alt="" width="25px" height="25px"> <p>Search</p></a>
 </div>
 <div id="foot-desc">
-    <p><b>Dream stream</b> is a web app created by Gage Lieble. This project was assigned for my Pdx Code Guild's Capstone final. For more info check out my Github below! </p>
+    <p><b>Dream stream</b> is a web app created by me, Gage Lieble. This django app was assigned by Pdx Code Guild as my final capstone project. For more info check out my Github below! </p>
 </div>
 </div>
 <div id="socials">
