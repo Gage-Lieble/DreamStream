@@ -22,6 +22,9 @@ Stored data that the app will require
 - :small_red_triangle_down:**For Account**:small_red_triangle_down:
 - Username
 - Password
+- PFP
+- Email
+- Full name
 ## Schedule
 #### Week 1:
 MVP
