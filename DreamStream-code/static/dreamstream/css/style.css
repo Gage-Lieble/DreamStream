@@ -49,7 +49,7 @@ label{
 
 
 /* spinner */
-.spinnercont{
+#spinnercont{
     position: fixed;
     z-index: 200;
     height: 100vh;
@@ -62,7 +62,7 @@ label{
     opacity: 1;
     transition: opacity 0.2s;
 }
-.spinnercont.fade{
+#spinnercont.fade{
     opacity: 0;
 }
 

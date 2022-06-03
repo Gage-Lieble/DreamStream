@@ -10,30 +10,61 @@
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
 </head>
 <body>
+    <div id="spinnercont">
+        <div class="spinner"><img src="{% static 'dreamstream/images/preloader.gif' %}" alt=""></div>
+    </div>
     <div id="nav-cont">
         <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
         <div class="content-cont">
 
             {% if usern == 'AnonymousUser' %}
-            <div class="username-nav"><a style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
+            <div class="username-nav"><a class="searchbtnjs" style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
 
                 {% else %}
                 <div class="username-nav">{{request.user}}</div>
             {% endif %}
                 
         <div class="nav-links">
-            <a href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
-            </a><a href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+            <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
+            </a><a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
         </div>
     </div>
     </div>
     <div id="form-cont">
     <form action="{% url 'dream_users:signup' %}" method="POST">
         {% csrf_token %}{{form}}
-        <button type="submit">Sign Up &#129170;</button>
+        <button class="searchbtnjs" type="submit">Sign Up &#129170;</button>
     </form>
-    <a style="color: white" href="{% url 'dream_users:login' %}">Back to Login &#129170;</a>
+    <a class="searchbtnjs" style="color: white" href="{% url 'dream_users:login' %}">Back to Login &#129170;</a>
 </div>
-
+<script>
+    const targetDiv = document.getElementById('spinnercont');
+    const toggle = document.getElementsByClassName('searchbtnjs');
+    window.addEventListener('pageshow', function(event){
+        const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+        if(historyTraversal){ 
+            window.location.reload();
+        }
+    });
+    window.addEventListener('load', function(){
+        
+        targetDiv.style.visibility = 'visible';
+        
+        setTimeout(function(){
+            targetDiv.style.opacity = '0';
+            
+        }, 250)
+        setTimeout(function(){
+            targetDiv.style.visibility = 'hidden';
+        }, 500)
+    });
+    for (var i = 0, len = toggle.length; i < len; i++) {
+        toggle[i].addEventListener('click', function(){
+        targetDiv.style.opacity = '1';
+        targetDiv.style.visibility = 'visible';
+        targetDiv.classList.toggle('fade');
+    });
+}
+</script>
 </body>
 </html>
