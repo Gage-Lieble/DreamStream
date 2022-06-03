@@ -2,7 +2,7 @@
 #### PDX CodeGuild Capstone Project by Gage Lieble
 > Search for your favorite movies and find the best price.
 ## Project Outline
-DreamStream is a Streaming Availablity search app. By using the [Watch Mode](https://api.watchmode.com/) I'm able to create a functional app that allows the user to input the title of any movie. The search result returns a page containing links to different streaming services and their price points. Along side these results the sections **"similar movies", "4K status", "trailer", and the "movies stats"** will also populate on the page. utilizing the account system you can create an account within the app allows you to save specific movies to your favorites list ensuring you that you don't have to search for the same movie twice.
+DreamStream is a Streaming Availablity search app. By using the [Watch Mode API](https://api.watchmode.com/) I'm able to create a functional app that allows the user to input the title of any movie. The search result returns a page containing links to different streaming services and their price points. Along side these results the sections **"similar movies", "4K status", "trailer", and the "movies stats"** will also populate on the page. utilizing the account system you can create an account within the app allows you to save specific movies to your favorites list ensuring you that you don't have to search for the same movie twice.
 ## Features
 There are many streaming services that stream thousands upon thousands of different movies all at different price points. **each and every person wouldn't mind saving some money**; and by comparing all these streaming service prices, DreamStream is able to do just that.
 #### Base/Crucial Features:
