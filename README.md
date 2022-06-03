@@ -36,12 +36,12 @@ Extra
 - [x] Allow user to remove from favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
 - [ ] Add bio section to profile page
-- [ ] Add custom PFP to profile page
+- [x] Add custom PFP to profile page
 #### Week 3:
 Finalizations
 - [x] Begin styling 
 - [x] Create app logo and image assests
 - [x] Add popular movie titles to app home page
 - [x] Footer
-- [ ] Desktop responsive
+- [x] Desktop responsive
 - [ ] Deploy app
