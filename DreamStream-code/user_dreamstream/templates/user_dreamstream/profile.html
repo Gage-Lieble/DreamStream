@@ -53,7 +53,12 @@
             <h1>{{request.user.last_name}}</h1>
             {% endif %}
         </div>
+        
+        {% comment %}
+            
         <a class='profile-logout' href="{% url 'dream_users:logout' %}">Logout &#129170;</a>
+        {% endcomment %}
+            
         <a class="fav-arrow" href="#favorites-title">
         
             <p>To Favs</p>

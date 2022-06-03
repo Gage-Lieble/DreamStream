@@ -12,7 +12,10 @@
 </head>
 
 <body>
-  
+  <div class="spinnercont">
+      <div class="spinner"><img src="{% static 'dreamstream/images/preloader.gif' %}" alt=""></div>
+  </div>
+
     <div id="nav-cont">
         <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
         <div class="content-cont">
@@ -35,10 +38,11 @@
         <h1>Dream Stream</h1>
     <form action="{% url 'search_app:results' %}" method="POST">
         {% csrf_token %} {{form}} 
-        <button type="submit">Search &#129170;</button>
+        <button class="searchbtnjs" type="submit">Search &#129170;</button>
     </form>
     </div>
-    
+
+
     <div id="featured-cont">
         <h1>Featured Content</h1>
         <div class="inner-featured-cont">
@@ -71,8 +75,35 @@
 </div>
 </div>
 
-
+<script>
+    const targetDiv = document.querySelector('.spinnercont');
+    const toggle = document.querySelector('.searchbtnjs');
+    window.addEventListener('pageshow', function(event){
+        const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+        if(historyTraversal){ 
+            window.location.reload();
+        }
+    });
+    window.addEventListener('load', function(){
+        
+        targetDiv.style.visibility = 'visible';
+        
+        setTimeout(function(){
+            targetDiv.style.opacity = '0';
+            
+        }, 250)
+        setTimeout(function(){
+            targetDiv.style.visibility = 'hidden';
+        }, 500)
+    });
+    forEach(item=>{toggle.addEventListener('click', function(){
+        targetDiv.style.opacity = '1';
+        targetDiv.style.visibility = 'visible';
+        targetDiv.classList.toggle('fade');
+    });
+    });
+</script>
 </body>
-
+PRELOADER BORKEN BECUASE I CANT APPLY BUTTON CLASS TO MULTPILT ITEMS
 
 </html>
