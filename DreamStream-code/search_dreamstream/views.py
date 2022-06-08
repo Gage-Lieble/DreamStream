@@ -5,7 +5,7 @@ import urllib.request
 import json
 from .forms import *
 
-api_key = "ePNPSjJusFAz58OMZpGqX1Jk7UFeLH5THyKfED6X"
+api_key = "mBgSF815S72jBu7ls6MoVvWqzk8sXixFUpwNsS5E"
 def index(request):
 
     featured_movies_list = ['The%20Batman', 'Firestarter', 'Spiderman%20no%20way%20home', 'Us', 'Step%20brothers', 'Dude%20wheres%20my%20car', 'Pet%20sematary', 'Star%20Wars:%20The%20Rise%20of%20Skywalker', 'Free%20Guy', 'Conjuring']

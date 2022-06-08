@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(38, 38, 38) !important;
+    background-color: rgb(32, 32, 32) !important;
     color: white !important;
     font-family: 'futura' !important;
     position: relative;
