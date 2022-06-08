@@ -14,8 +14,10 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': ' Your Password'}), label='Password', max_length=10,)
 
 class ChangePfpForm(ModelForm):
+    profile_pic = forms.ImageField(widget=forms.FileInput)
     class Meta:
         model = ProfileDetails
-        fields = ['profile_pic']
+        fields = '__all__'
+        exclude = ['user']
         
        

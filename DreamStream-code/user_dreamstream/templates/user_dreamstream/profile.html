@@ -1,144 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>{{request.user}}'s Profile</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
+    <link rel="icon" href="/static/dreamstream/images/favicon.svg">
 </head>
+
 <body>
     <div id="spinnercont">
         <div class="spinner"><img src="{% static 'dreamstream/images/preloader.gif' %}" alt=""></div>
     </div>
     <div id="nav-cont">
-        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
+        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt="">
+            <p class="brand-title">DREAM STREAM</p>
+        </div>
         <div class="content-cont">
 
             {% if usern == 'AnonymousUser' %}
             <div class="username-nav"><a class="searchbtnjs" style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
 
-                {% else %}
-                <div class="username-nav">{{request.user}}</div>
+            {% else %}
+            <div class="username-nav">{{request.user}}</div>
             {% endif %}
-                
-        <div class="nav-links">
-            <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
-            </a><a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+
+            <div class="nav-links">
+                <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
+                </a>
+                <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+            </div>
         </div>
     </div>
-    </div>
 
 
 
 
 
-<div id="body-cont">
-    <section id="profile-section">
-    <div id="down-name">
-        <h1>Hey, {{request.user}}!</h1>
-        <div id="pfp-cont"><img id="pfp-image" src="{{ request.user.profiledetails.profile_pic.url }}" alt=""></div>
-    </div>
-    <div id="profile-info">
-        <div class="fav-amount">
-            {{numfav}} 
-            <h1>Favs</h1> 
+    <div id="body-cont">
+        <section id="profile-section">
+            <div id="down-name">
+                <h1>Hey, {{request.user}}!</h1>
+
+                <div id="pfp-cont"><img id="pfp-image" src="{{ request.user.profiledetails.profile_pic.url }}" alt="">
+                    <div id="settings-icon-cont">
+                        <a class="searchbtnjs" href="{% url 'dream_users:profile_settings' %}"><img class="settings-img" src="{% static 'dreamstream/images/settings_icon.svg' %}" alt=""></a>
+                    </div>
+                </div>
+
+            </div>
+            <h1>{{request.user.profiledetails.profile_pic.validators}}</h1>
+            <div id="profile-info">
+                <div class="fav-amount">
+                    {{numfav}}
+                    <h1>Favs</h1>
+                </div>
+                <div class="your-name">
+
+                    {% if request.user.first_name == '' %} {{request.user}} {% else %} {{request.user.first_name}}
+                    <h1>{{request.user.last_name}}</h1>
+                    {% endif %}
+                </div>
+
+                <a class="fav-arrow" class="" href="#favorites-title">
+
+                    <p>To Favs</p>
+                    <img src="{% static 'dreamstream/images/downarrow.svg' %}" width="100" alt="">
+
+                </a>
+            </div>
+
+        </section>
+        <h1 id="favorites-title">Your Favorites</h1>
+
+
+        {% if numfav == 0 %}
+        <div class="fav-none">
+            0
+            <h1>Favs</h1>
         </div>
-        <div class="your-name">
-            
-            {% if request.user.first_name == '' %}
-                {{request.user}}
-            
-                {% else %}
-            {{request.user.first_name}}
-            <h1>{{request.user.last_name}}</h1>
-            {% endif %}
+        {% endif %}
+
+        <div id="favorites-cont">
+            {% for fav in favs %}
+            <div class="favorite-poster-cont">
+                <a class="searchbtnjs" id="favs-links" href="{% url 'search_app:similar_results' sim=fav.title %}"><img class='fav-posters' src="{{fav.poster_img}}" alt=""></a><a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=fav.title %}">{{fav.title}} &#129170;</a>
+                <div class="trash-icon">
+                    <a class="searchbtnjs" href="{% url 'dream_users:delete_fav' fav.id %}"><img src="{% static 'dreamstream/images/trash.svg' %}" alt="trash_icon"></a>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        
-        
-            
-        <a class="profile-logout searchbtnjs" class='' href="{% url 'dream_users:logout' %}">Logout &#129170;</a>
-       
-            
-        <a class="fav-arrow" class="" href="#favorites-title">
-        
-            <p>To Favs</p>
-            <img src="{% static 'dreamstream/images/downarrow.svg' %}" width="100"alt="">
-        
-    </a>
     </div>
-    
-</section>
-<h1 id="favorites-title">Your Favorites</h1>
+    <a class="profile-logout searchbtnjs" class='' href="{% url 'dream_users:logout' %}">Logout &#129170;</a>
+    <div id="footer-cont">
+        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
+        <div id="desc-links">
 
-
-{% if numfav == 0 %}
-    <div class="fav-none">
-        0
-        <h1>Favs</h1> 
+            <div id="nav-foot-cont">
+                <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="" width="25px" height="25px">
+                    <p>Profile</p>
+                </a>
+                <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img src="{% static 'dreamstream/images/search_icon.svg' %}" alt="" width="25px" height="25px">
+                    <p>Search</p>
+                </a>
+            </div>
+            <div id="foot-desc">
+                <p><b>Dream stream</b> is a web app created by me, Gage Lieble. This django app was assigned by Pdx Code Guild as my final capstone project. For more info check out my Github below! </p>
+            </div>
+        </div>
+        <div id="socials">
+            <a class="searchbtnjs" href="https://www.linkedin.com/in/gage-lieble-954076229/"><img src="{% static 'dreamstream/images/linkedin.svg' %}" alt="" width="50px" height="50px"></a>
+            <a class="searchbtnjs" href="https://www.gagelieble.com/"><img src="{% static 'dreamstream/images/webpage.svg' %}" alt="" width="50px" height="50px"></a>
+            <a class="searchbtnjs" href="https://github.com/Gage-Lieble"><img src="{% static 'dreamstream/images/github.svg' %}" alt="" width="50px" height="50px"></a>
+        </div>
     </div>
-{% endif %}
-    
-<div id="favorites-cont">
-{% for fav in favs  %}
-<div class="favorite-poster-cont">
-<a class="searchbtnjs" id="favs-links" href="{% url 'search_app:similar_results' sim=fav.title %}"><img class='fav-posters'src="{{fav.poster_img}}" alt=""></a><a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=fav.title %}">{{fav.title}} &#129170;</a>
-<div class="trash-icon">
-<a class="searchbtnjs" href="{% url 'dream_users:delete_fav' fav.id %}"><img src="{% static 'dreamstream/images/trash.svg' %}" alt="trash_icon"></a>
-</div>
-</div>
-{% endfor %}
-</div>
-</div>
+    <script>
+        const targetDiv = document.getElementById('spinnercont'); //Preload container
+        const toggle = document.getElementsByClassName('searchbtnjs'); // Regular links
+        const inputToggle = document.getElementsByClassName('inputtog'); //Input button
+        let formjs = document.getElementById('id_search'); //Input
+        let formval = 0
 
-<div id="footer-cont">
-    <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
-    <div id="desc-links">
-    
-    <div id="nav-foot-cont">
-    <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="" width="25px" height="25px"> <p>Profile</p></a>
-    <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img src="{% static 'dreamstream/images/search_icon.svg' %}" alt="" width="25px" height="25px"> <p>Search</p></a>
-</div>
-<div id="foot-desc">
-    <p><b>Dream stream</b> is a web app created by me, Gage Lieble. This django app was assigned by Pdx Code Guild as my final capstone project. For more info check out my Github below! </p>
-</div>
-</div>
-<div id="socials">
-    <a class="searchbtnjs" href="https://www.linkedin.com/in/gage-lieble-954076229/"><img src="{% static 'dreamstream/images/linkedin.svg' %}" alt="" width="50px" height="50px"></a>
-    <a class="searchbtnjs" href="https://www.gagelieble.com/"><img src="{% static 'dreamstream/images/webpage.svg' %}" alt="" width="50px" height="50px"></a>
-    <a class="searchbtnjs" href="https://github.com/Gage-Lieble"><img src="{% static 'dreamstream/images/github.svg' %}" alt="" width="50px" height="50px"></a>
-</div>
-</div>
-<script>
-    const targetDiv = document.getElementById('spinnercont');
-    const toggle = document.getElementsByClassName('searchbtnjs');
-    window.addEventListener('pageshow', function(event){
-        const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
-        if(historyTraversal){ 
-            window.location.reload();
+        // Checks if user used browser back button
+        window.addEventListener('pageshow', function(event) {
+            const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                window.location.reload();
+            }
+        });
+
+        // Checks if page is loaded
+        window.addEventListener('load', function() {
+            targetDiv.style.visibility = 'visible';
+            setTimeout(function() {
+                targetDiv.style.opacity = '0';
+            }, 250)
+            setTimeout(function() {
+                targetDiv.style.visibility = 'hidden';
+            }, 500)
+        });
+
+        // Checks if input has a value
+        setInterval(function() {
+            let formval = formjs.value.length
+            for (var i = 0, len = inputToggle.length; i < len; i++) {
+                if (formval > 0) {
+                    inputToggle[i].addEventListener('click', function() {
+                        targetDiv.style.opacity = '1';
+                        targetDiv.style.visibility = 'visible';
+                        targetDiv.classList.toggle('fade');
+                    });
+                }
+            }
+        }, 500);
+
+        // Checks if link is pressed
+        for (var i = 0, len = toggle.length; i < len; i++) {
+            toggle[i].addEventListener('click', function() {
+                targetDiv.style.opacity = '1';
+                targetDiv.style.visibility = 'visible';
+                targetDiv.classList.toggle('fade');
+            });
         }
-    });
-    window.addEventListener('load', function(){
-        
-        targetDiv.style.visibility = 'visible';
-        
-        setTimeout(function(){
-            targetDiv.style.opacity = '0';
-            
-        }, 250)
-        setTimeout(function(){
-            targetDiv.style.visibility = 'hidden';
-        }, 500)
-    });
-    for (var i = 0, len = toggle.length; i < len; i++) {
-        toggle[i].addEventListener('click', function(){
-        targetDiv.style.opacity = '1';
-        targetDiv.style.visibility = 'visible';
-        targetDiv.classList.toggle('fade');
-    });
-}
-</script>
+    </script>
 </body>
+
 </html>

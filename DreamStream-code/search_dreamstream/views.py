@@ -1,10 +1,11 @@
 
+from dataclasses import replace
 from django.shortcuts import render
 import urllib.request
 import json
 from .forms import *
 
-api_key = "tmzKqKIa2neypXcf3fku5rTHlrb6BDalIKVN7lUt"
+api_key = "ePNPSjJusFAz58OMZpGqX1Jk7UFeLH5THyKfED6X"
 def index(request):
 
     featured_movies_list = ['The%20Batman', 'Firestarter', 'Spiderman%20no%20way%20home', 'Us', 'Step%20brothers', 'Dude%20wheres%20my%20car', 'Pet%20sematary', 'Star%20Wars:%20The%20Rise%20of%20Skywalker', 'Free%20Guy', 'Conjuring']
@@ -98,7 +99,8 @@ def results(request):
             return render(request, 'search_dreamstream/results.html', context)
         else:
             form = TitleForm(request.POST, initial={'search': req})
-            context ={'usersearch': req, 'form': form}
+            usersearch = req.replace('%20', ' ')
+            context ={'usersearch': usersearch, 'form': form}
             return render(request, 'search_dreamstream/404.html', context)
 
 
@@ -109,7 +111,7 @@ def similar_results(request, sim):
         form_title = f"https://api.watchmode.com/v1/autocomplete-search/?apiKey={api_key}&search_value={req}" # Access the movie titles ID
         with urllib.request.urlopen(form_title) as url:
             title = json.loads(url.read().decode()) # Converts the title to ID number
-        
+        print(title)
         title_detail = f"https://api.watchmode.com/v1/title/{title['results'][0]['id']}/details/?apiKey={api_key}" # Returns single result The [0] changes which movie to select
         title_sources = f"https://api.watchmode.com/v1/title/{title['results'][0]['id']}/sources/?apiKey={api_key}"
         all_results = f"https://api.watchmode.com/v1/title/{title}/details/?apiKey={api_key}" # NOT NEEDED
@@ -159,3 +161,5 @@ def similar_results(request, sim):
         return render(request, 'search_dreamstream/similar.html', context)
 
 
+def handle_not_found(request, exception):
+    return render(request, 'search_dreamstream/404.html')

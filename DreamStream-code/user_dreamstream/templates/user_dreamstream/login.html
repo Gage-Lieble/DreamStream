@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,66 +9,95 @@
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
+    <link rel="icon" href="/static/dreamstream/images/favicon.svg">
 </head>
+
 <body>
     <div id="spinnercont">
         <div class="spinner"><img src="{% static 'dreamstream/images/preloader.gif' %}" alt=""></div>
     </div>
     <div id="nav-cont">
-        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
+        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt="">
+            <p class="brand-title">DREAM STREAM</p>
+        </div>
         <div class="content-cont">
 
             {% if usern == 'AnonymousUser' %}
             <div class="username-nav"><a class="searchbtnjs" style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
 
-                {% else %}
-                <div class="username-nav">{{request.user}}</div>
+            {% else %}
+            <div class="username-nav">Login</div>
             {% endif %}
-                
-        <div class="nav-links">
-            <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
-            </a><a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+
+            <div class="nav-links">
+                <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
+                </a>
+                <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+            </div>
         </div>
     </div>
-    </div>
     <div id="form-cont">
-    <form action="" method="POST">
-        {% csrf_token %} {{ log_form }}
-        <button class="searchbtnjs" type="submit">Login &#129170;</button>
-    </form>
-</div>
+        <form action="" method="POST">
+            {% csrf_token %} {{ log_form }}
+            <button class="inputtog" type="submit">Login &#129170;</button>
+        </form>
+    </div>
     <div id="signup-cont">
-    <p class="noacct-p">No account?</p> <a class="searchbtnjs" href="{% url 'dream_users:signup' %}">Sign up &#129170;</a>
-</div>
+        <p class="noacct-p">No account?</p> <a class="searchbtnjs" href="{% url 'dream_users:signup' %}">Sign up &#129170;</a>
+    </div>
 
-<script>
-    const targetDiv = document.getElementById('spinnercont');
-    const toggle = document.getElementsByClassName('searchbtnjs');
-    window.addEventListener('pageshow', function(event){
-        const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
-        if(historyTraversal){ 
-            window.location.reload();
+    <script>
+        const targetDiv = document.getElementById('spinnercont'); //Preload container
+        const toggle = document.getElementsByClassName('searchbtnjs'); // Regular links
+        const inputToggle = document.getElementsByClassName('inputtog'); //Input button
+        let userjs = document.getElementById('id_username'); //User field
+        let passjs = document.getElementById('id_password'); //Pass field
+        let userlen = 0
+        let passlen = 0
+
+        // Checks for back button on brow
+        window.addEventListener('pageshow', function(event) {
+            const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                window.location.reload();
+            }
+        });
+
+        // Checks if page is loaded
+        window.addEventListener('load', function() {
+            targetDiv.style.visibility = 'visible';
+            setTimeout(function() {
+                targetDiv.style.opacity = '0';
+            }, 250)
+            setTimeout(function() {
+                targetDiv.style.visibility = 'hidden';
+            }, 500)
+        });
+
+        // Checks if input has a value
+        setInterval(function() {
+            let userlen = userjs.value.length
+            let passlen = passjs.value.length
+            for (var i = 0, len = inputToggle.length; i < len; i++) {
+                if (userlen && passlen > 0) {
+                    inputToggle[i].addEventListener('click', function() {
+                        targetDiv.style.opacity = '1';
+                        targetDiv.style.visibility = 'visible';
+                        targetDiv.classList.toggle('fade');
+                    });
+                }
+            }
+        }, 500);
+
+        // Checks if link is pressed
+        for (var i = 0, len = toggle.length; i < len; i++) {
+            toggle[i].addEventListener('click', function() {
+                targetDiv.style.opacity = '1';
+                targetDiv.style.visibility = 'visible';
+                targetDiv.classList.toggle('fade');
+            });
         }
-    });
-    window.addEventListener('load', function(){
-        
-        targetDiv.style.visibility = 'visible';
-        
-        setTimeout(function(){
-            targetDiv.style.opacity = '0';
-            
-        }, 250)
-        setTimeout(function(){
-            targetDiv.style.visibility = 'hidden';
-        }, 500)
-    });
-    for (var i = 0, len = toggle.length; i < len; i++) {
-        toggle[i].addEventListener('click', function(){
-        targetDiv.style.opacity = '1';
-        targetDiv.style.visibility = 'visible';
-        targetDiv.classList.toggle('fade');
-    });
-}
-</script>
+    </script>
 </body>
+
 </html>

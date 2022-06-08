@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Settings</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
+    <link rel="icon" href="/static/dreamstream/images/favicon.svg">
 </head>
+
 <body>
     <div id="spinnercont">
         <div class="spinner"><img src="{% static 'dreamstream/images/preloader.gif' %}" alt=""></div>
     </div>
     <div id="nav-cont">
-        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
+        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt="">
+            <p class="brand-title">DREAM STREAM</p>
+        </div>
         <div class="content-cont">
 
             {% if usern == 'AnonymousUser' %}
             <div class="username-nav"><a class="searchbtnjs" style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
 
-                {% else %}
-                <div class="username-nav">{{request.user}}</div>
+            {% else %}
+            <div class="username-nav">{{request.user}}</div>
             {% endif %}
-                
-        <div class="nav-links">
-            <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
-            </a><a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+
+            <div class="nav-links">
+                <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
+                </a>
+                <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+            </div>
         </div>
     </div>
-    </div>
-    
-    <div id="form-cont">
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %} {{ changeform }}
-        <button class="searchbtnjs" type="submit">Apply &#129170;</button>
-    </form>
-</div>
 
-<script>
-    const targetDiv = document.getElementById('spinnercont');
-    const toggle = document.getElementsByClassName('searchbtnjs');
-    window.addEventListener('pageshow', function(event){
-        const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
-        if(historyTraversal){ 
-            window.location.reload();
+    <div id="form-settings">
+        <h1>Change Profile Pic</h1>
+        <img id="pfp-image" src="{{ request.user.profiledetails.profile_pic.url }}" alt="">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} {{ changeform}}
+            <button class="inputtog" type="submit">Apply &#129170;</button>
+        </form>
+        <h1>{{sizeerror}}</h1>
+    </div>
+    <a class="searchbtnjs" href="{% url 'dream_users:profile' %}">&#129168; Go back</a>
+    <script>
+        const targetDiv = document.getElementById('spinnercont'); //Preload container
+        const toggle = document.getElementsByClassName('searchbtnjs'); // Regular links
+        const inputToggle = document.getElementsByClassName('inputtog'); //Input button
+        let formjs = document.getElementById('id_search'); //Input
+        let formval = 0
+
+        // Checks if page is loaded
+        window.addEventListener('load', function() {
+            targetDiv.style.visibility = 'visible';
+            setTimeout(function() {
+                targetDiv.style.opacity = '0';
+            }, 250)
+            setTimeout(function() {
+                targetDiv.style.visibility = 'hidden';
+            }, 500)
+        });
+
+        // Checks if input has a value
+        setInterval(function() {
+            let formval = formjs.value.length
+            for (var i = 0, len = inputToggle.length; i < len; i++) {
+                if (formval > 0) {
+                    inputToggle[i].addEventListener('click', function() {
+                        targetDiv.style.opacity = '1';
+                        targetDiv.style.visibility = 'visible';
+                        targetDiv.classList.toggle('fade');
+                    });
+                }
+            }
+        }, 500);
+
+        // Checks if link is pressed
+        for (var i = 0, len = toggle.length; i < len; i++) {
+            toggle[i].addEventListener('click', function() {
+                targetDiv.style.opacity = '1';
+                targetDiv.style.visibility = 'visible';
+                targetDiv.classList.toggle('fade');
+            });
         }
-    });
-    window.addEventListener('load', function(){
-        
-        targetDiv.style.visibility = 'visible';
-        
-        setTimeout(function(){
-            targetDiv.style.opacity = '0';
-            
-        }, 250)
-        setTimeout(function(){
-            targetDiv.style.visibility = 'hidden';
-        }, 500)
-    });
-    for (var i = 0, len = toggle.length; i < len; i++) {
-        toggle[i].addEventListener('click', function(){
-        targetDiv.style.opacity = '1';
-        targetDiv.style.visibility = 'visible';
-        targetDiv.classList.toggle('fade');
-    });
-}
-</script>
+    </script>
 </body>
+
 </html>

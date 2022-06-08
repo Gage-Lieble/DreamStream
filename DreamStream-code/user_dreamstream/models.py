@@ -1,10 +1,7 @@
-from distutils.command.upload import upload
-from email.policy import default
-from signal import default_int_handler
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ImageField
+from .validators import *
 # Create your models here.
 
 class FavMovies(models.Model):
@@ -16,8 +13,8 @@ class FavMovies(models.Model):
         return f'{self.fav_user} :: {self.title} :: {self.poster_img}'
 
 class ProfileDetails(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(default="default.jpg", blank=True, upload_to='static/dreamstream/images/pfp/')
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(default="default.jpg",null=True, blank=True, upload_to='pfp/', validators=[image_restrictions])
 
     def __str__(self):
         return f"{self.user}'s Profile info"

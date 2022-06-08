@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static%}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <title>Result</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
+    <link rel="icon" href="/static/dreamstream/images/favicon.svg">
 </head>
 
 <body>
@@ -15,66 +17,68 @@
         <div class="spinner"><img src="{% static 'dreamstream/images/preloader.gif' %}" alt=""></div>
     </div>
     <div id="nav-cont">
-        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt=""><p class="brand-title">DREAM STREAM</p></div>
+        <div class="brand-logo"><img class="brand-img" src="{% static 'dreamstream/images/GICON.svg' %}" alt="">
+            <p class="brand-title">DREAM STREAM</p>
+        </div>
         <div class="content-cont">
 
             {% if usern == 'AnonymousUser' %}
             <div class="username-nav"><a class="searchbtnjs" style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
 
-                {% else %}
-                <div class="username-nav">{{request.user}}</div>
+            {% else %}
+            <div class="username-nav">{{request.user}}</div>
             {% endif %}
-                
-        <div class="nav-links">
-            <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
-            </a><a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+
+            <div class="nav-links">
+                <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
+                </a>
+                <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img class="search-img" src="{% static 'dreamstream/images/search_icon.svg' %}" alt=""></a>
+            </div>
         </div>
-    </div>
     </div>
     <section id="top-section">
-    <div id="top-result">
-        <div id="poster-cont">
-            <img id="poster" src="https://cdn.watchmode.com/posters/{{poster}}" alt="movie-poster"> {% comment %}
-            <div id="rating-num">
-                <p>{{rating}}&#9733;</p>
+        <div id="top-result">
+            <div id="poster-cont">
+                <img id="poster" src="https://cdn.watchmode.com/posters/{{poster}}" alt="movie-poster"> {% comment %}
+                <div id="rating-num">
+                    <p>{{rating}}&#9733;</p>
+                </div>
+                {% endcomment %}
+                <a id="best-link" href="#avaliable-cont">View Best Prices</a>
+
+                <a class="trailer searchbtnjs" href="{{trailer}}">Watch Trailer</a>
             </div>
-            {% endcomment %}
-            <a id="best-link" href="#avaliable-cont">View Best Prices</a>
 
-        <a class="trailer searchbtnjs" href="{{trailer}}">Watch Trailer</a>
-        </div>
 
-       
-        <div id="overview-cont">
-            <h2>{{title}}</h2>
-            {% if usern != 'AnonymousUser' %}
-                <a class="searchbtnjs" href="{% url 'dream_users:add_fav' fav=title posterimg=poster %}">+ Add to favorites</a>
-            {% endif %}
-            <p class="description">{{description}}</p>
-            <p>Released: {{release}}</p>
-        </div>
+            <div id="overview-cont">
+                <h2>{{title}}</h2>
+                {% if usern != 'AnonymousUser' %}
+                <a class="searchbtnjs" href="{% url 'dream_users:add_fav' fav=title posterimg=poster %}">+ Add to favorites</a> {% endif %}
+                <p class="description">{{description}}</p>
+                <p>Released: {{release}}</p>
+            </div>
     </section>
-        {% if links|length > 0 %}
-        <div id="avaliable-cont">
-            <h3><span>Avaliable At</span></h3>
-            <p>best price <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+    {% if links|length > 0 %}
+    <div id="avaliable-cont">
+        <h3><span>Avaliable At</span></h3>
+        <p>best price <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
         </svg></p>
-            <div class="link-cont">
-                {% for key, value in links.items %}
+        <div class="link-cont">
+            {% for key, value in links.items %}
 
-                
-                <div id="price-quality-cont">
-                    <a class="service-links searchbtnjs" href="{{key}}">{{value.0|slice:'15'}} &#129170;</a>
-                    <div>
-                        <div class="link-price">{{value.1}}</div>
-                        <div class="quality-{{value.2}}">{{value.2}}</div>
-                    </div>
+
+            <div id="price-quality-cont">
+                <a class="service-links searchbtnjs" href="{{key}}">{{value.0|slice:'15'}} &#129170;</a>
+                <div>
+                    <div class="link-price">{{value.1}}</div>
+                    <div class="quality-{{value.2}}">{{value.2}}</div>
                 </div>
-
-                {% endfor %}
             </div>
+
+            {% endfor %}
         </div>
+    </div>
     </div>
     {% else %}
     <div id="avaliable-cont">
@@ -85,49 +89,65 @@
     <div id="footer-cont">
         <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
         <div id="desc-links">
-        
-        <div id="nav-foot-cont">
-        <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="" width="25px" height="25px"> <p>Profile</p></a>
-        <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img src="{% static 'dreamstream/images/search_icon.svg' %}" alt="" width="25px" height="25px"> <p>Search</p></a>
-    </div>
-    <div id="foot-desc">
-        <p><b>Dream stream</b> is a web app created by me, Gage Lieble. This django app was assigned by Pdx Code Guild as my final capstone project. For more info check out my Github below! </p>
-    </div>
-    </div>
-    <div id="socials">
-        <a class="searchbtnjs" href="https://www.linkedin.com/in/gage-lieble-954076229/"><img src="{% static 'dreamstream/images/linkedin.svg' %}" alt="" width="50px" height="50px"></a>
-        <a class="searchbtnjs" href="https://www.gagelieble.com/"><img src="{% static 'dreamstream/images/webpage.svg' %}" alt="" width="50px" height="50px"></a>
-        <a class="searchbtnjs" href="https://github.com/Gage-Lieble"><img src="{% static 'dreamstream/images/github.svg' %}" alt="" width="50px" height="50px"></a>
-    </div>
+
+            <div id="nav-foot-cont">
+                <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="" width="25px" height="25px">
+                    <p>Profile</p>
+                </a>
+                <a class="searchbtnjs" href="{% url 'search_app:index' %}"><img src="{% static 'dreamstream/images/search_icon.svg' %}" alt="" width="25px" height="25px">
+                    <p>Search</p>
+                </a>
+            </div>
+            <div id="foot-desc">
+                <p><b>Dream stream</b> is a web app created by me, Gage Lieble. This django app was assigned by Pdx Code Guild as my final capstone project. For more info check out my Github below! </p>
+            </div>
+        </div>
+        <div id="socials">
+            <a class="searchbtnjs" href="https://www.linkedin.com/in/gage-lieble-954076229/"><img src="{% static 'dreamstream/images/linkedin.svg' %}" alt="" width="50px" height="50px"></a>
+            <a class="searchbtnjs" href="https://www.gagelieble.com/"><img src="{% static 'dreamstream/images/webpage.svg' %}" alt="" width="50px" height="50px"></a>
+            <a class="searchbtnjs" href="https://github.com/Gage-Lieble"><img src="{% static 'dreamstream/images/github.svg' %}" alt="" width="50px" height="50px"></a>
+        </div>
     </div>
     <script>
-        const targetDiv = document.getElementById('spinnercont');
-        const toggle = document.getElementsByClassName('searchbtnjs');
-        window.addEventListener('pageshow', function(event){
-            const historyTraversal = event.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2);
-            if(historyTraversal){ 
-                window.location.reload();
-            }
-        });
-        window.addEventListener('load', function(){
-            
+        const targetDiv = document.getElementById('spinnercont'); //Preload container
+        const toggle = document.getElementsByClassName('searchbtnjs'); // Regular links
+        const inputToggle = document.getElementsByClassName('inputtog'); //Input button
+        let formjs = document.getElementById('id_search'); //Input
+        let formval = 0
+
+        // Checks if page is loaded
+        window.addEventListener('load', function() {
             targetDiv.style.visibility = 'visible';
-            
-            setTimeout(function(){
+            setTimeout(function() {
                 targetDiv.style.opacity = '0';
-                
             }, 250)
-            setTimeout(function(){
+            setTimeout(function() {
                 targetDiv.style.visibility = 'hidden';
             }, 500)
         });
+
+        // Checks if input has a value
+        setInterval(function() {
+            let formval = formjs.value.length
+            for (var i = 0, len = inputToggle.length; i < len; i++) {
+                if (formval > 0) {
+                    inputToggle[i].addEventListener('click', function() {
+                        targetDiv.style.opacity = '1';
+                        targetDiv.style.visibility = 'visible';
+                        targetDiv.classList.toggle('fade');
+                    });
+                }
+            }
+        }, 500);
+
+        // Checks if link is pressed
         for (var i = 0, len = toggle.length; i < len; i++) {
-            toggle[i].addEventListener('click', function(){
-            targetDiv.style.opacity = '1';
-            targetDiv.style.visibility = 'visible';
-            targetDiv.classList.toggle('fade');
-        });
-    }
+            toggle[i].addEventListener('click', function() {
+                targetDiv.style.opacity = '1';
+                targetDiv.style.visibility = 'visible';
+                targetDiv.classList.toggle('fade');
+            });
+        }
     </script>
 </body>
 
