@@ -8,3 +8,5 @@ urlpatterns = [
     path('similar-result/<str:sim>', views.similar_results, name='similar_results')
     
 ]
+
+handler404 = "search_dreamstream.views.handle_not_found"

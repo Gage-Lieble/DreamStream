@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{{request.user}}'s Profile</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
@@ -88,7 +88,7 @@
         <div id="favorites-cont">
             {% for fav in favs %}
             <div class="favorite-poster-cont">
-                <a class="searchbtnjs" id="favs-links" href="{% url 'search_app:similar_results' sim=fav.title %}"><img class='fav-posters' src="{{fav.poster_img}}" alt=""></a><a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=fav.title %}">{{fav.title}} &#129170;</a>
+                <a class="searchbtnjs" id="favs-links" href="{% url 'search_app:similar_results' sim=fav.title %}"><img class='fav-posters' src="{{fav.poster_img}}" alt=""></a><a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=fav.title %}">{{fav.title}}</a>
                 <div class="trash-icon">
                     <a class="searchbtnjs" href="{% url 'dream_users:delete_fav' fav.id %}"><img src="{% static 'dreamstream/images/trash.svg' %}" alt="trash_icon"></a>
                 </div>
@@ -96,9 +96,9 @@
             {% endfor %}
         </div>
     </div>
-    <a class="profile-logout searchbtnjs" class='' href="{% url 'dream_users:logout' %}">Logout &#129170;</a>
+    <a class="profile-logout searchbtnjs" class='' href="{% url 'dream_users:logout' %}">Logout</a>
     <div id="footer-cont">
-        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
+        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com</a></p>
         <div id="desc-links">
 
             <div id="nav-foot-cont">

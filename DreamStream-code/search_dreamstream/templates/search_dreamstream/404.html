@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Result</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
@@ -22,12 +22,6 @@
         </div>
         <div class="content-cont">
 
-            {% if usern == 'AnonymousUser' %}
-            <div class="username-nav"><a class="searchbtnjs" style="color:white; text-decoration: none;" href="{% url 'dream_users:profile' %}">Login</a></div>
-
-            {% else %}
-            <div class="username-nav">{{request.user}}</div>
-            {% endif %}
 
             <div class="nav-links">
                 <a class="searchbtnjs" href="{% url 'dream_users:profile' %}"><img class="profile-img" src="{% static 'dreamstream/images/profile_icon.svg' %}" alt="">
@@ -40,20 +34,20 @@
 
     <section id="search-error-section">
         <h1>Whoops!</h1>
-        <h2><span class="error-search">{{usersearch}}</span> Is not a title we keep track of. Double check your spelling.</h2>
+        <h2><span class="error-search">{{usersearch}}</span> Is not a title we keep track of. Double check your spelling</h2>
         <h2></h2>
     </section>
     <section id="search-error-form">
         <div id="search-cont">
             <form action="{% url 'search_app:results' %}" method="POST">
                 {% csrf_token %} {{form}}
-                <button class="inputtog" type="submit">Search Again &#129170;</button>
+                <button class="inputtog" type="submit">Search Again</button>
             </form>
         </div>
     </section>
 
     <div id="footer-cont">
-        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
+        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com</a></p>
         <div id="desc-links">
 
             <div id="nav-foot-cont">

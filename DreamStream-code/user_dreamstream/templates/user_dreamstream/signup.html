@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Sign Up</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
@@ -39,9 +39,9 @@
     <div id="form-cont">
         <form action="{% url 'dream_users:signup' %}" method="POST">
             {% csrf_token %}{{form}}
-            <button class="inputtog" type="submit">Sign Up &#129170;</button>
+            <button class="inputtog" type="submit">Sign Up</button>
         </form>
-        <a class="searchbtnjs" style="color: white" href="{% url 'dream_users:login' %}">&#129168; Back to Login</a>
+        <a class="searchbtnjs" style="color: white" href="{% url 'dream_users:login' %}">Back to Login</a>
     </div>
     <script>
         const targetDiv = document.getElementById('spinnercont'); //Preload container

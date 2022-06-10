@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Settings</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
@@ -42,11 +42,11 @@
         <img id="pfp-image" src="{{ request.user.profiledetails.profile_pic.url }}" alt="">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %} {{ changeform}}
-            <button class="inputtog" type="submit">Apply &#129170;</button>
+            <button class="inputtog" type="submit">Apply</button>
         </form>
         <h1>{{sizeerror}}</h1>
     </div>
-    <a class="searchbtnjs" href="{% url 'dream_users:profile' %}">&#129168; Go back</a>
+    <a class="searchbtnjs" href="{% url 'dream_users:profile' %}">Go back</a>
     <script>
         const targetDiv = document.getElementById('spinnercont'); //Preload container
         const toggle = document.getElementsByClassName('searchbtnjs'); // Regular links

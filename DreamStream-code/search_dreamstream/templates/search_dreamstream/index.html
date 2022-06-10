@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Dream Stream</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
@@ -43,7 +43,7 @@
         <h1>Dream Stream</h1>
         <form id="formjs" action="{% url 'search_app:results' %}" method="POST">
             {% csrf_token %} {{form}}
-            <button class="inputtog" type="submit">Search &#129170;</button>
+            <button class="inputtog" type="submit">Search</button>
         </form>
     </div>
 
@@ -54,7 +54,7 @@
             {% for key, value in featured.items %}
             <div id="featured-titles">
                 <a class="searchbtnjs" href="{% url 'search_app:similar_results' sim=value %}"><img class="searchbtnjs" src="{{key}}" alt=""></a>
-                <a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=value %}">{{value|slice:'14'}} &#129170;</a>
+                <a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=value %}">{{value|slice:'14'}}</a>
             </div>
 
             {% endfor %}
@@ -62,7 +62,7 @@
     </div>
 
     <div id="footer-cont">
-        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
+        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com</a></p>
         <div id="desc-links">
 
             <div id="nav-foot-cont">

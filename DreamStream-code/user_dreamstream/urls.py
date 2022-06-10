@@ -15,3 +15,4 @@ urlpatterns = [
     path('delete/<int:fav_id>', views.delete_fav, name='delete_fav')
     ]
 
+handler404 = "search_dreamstream.views.handle_not_found"

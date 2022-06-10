@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Result</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
@@ -76,7 +76,7 @@
 
 
             <div id="price-quality-cont">
-                <a class="service-links searchbtnjs" href="{{key}}">{{value.0|slice:'15'}} &#129170;</a>
+                <a class="service-links searchbtnjs" href="{{key}}">{{value.0|slice:'15'}}</a>
                 <div>
                     <div class="link-price">{{value.1}}</div>
                     <div class="quality-{{value.2}}">{{value.2}}</div>
@@ -103,7 +103,7 @@
         {% for key, value in similarresults.items %}
         <div class="similar-results">
             <a class="searchbtnjs" href="{% url 'search_app:similar_results' sim=key %}"><img src="{{value}}" alt=""></a>
-            <a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=key %}">{{key}} &#129170;</a>
+            <a class="sim-link searchbtnjs" href="{% url 'search_app:similar_results' sim=key %}">{{key}}</a>
         </div>
         {% endfor %}
     </div>
@@ -115,7 +115,7 @@
 
 
     <div id="footer-cont">
-        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com &#129170;</a></p>
+        <p class="copy-write">&copy; 2022 | <a class="searchbtnjs" href="https://www.gagelieble.com/">GageLieble.Com</a></p>
         <div id="desc-links">
 
             <div id="nav-foot-cont">

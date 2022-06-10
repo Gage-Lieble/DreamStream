@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'dreamstream/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dreamstream/css/bootstrap.css' %}">
@@ -39,11 +39,11 @@
     <div id="form-cont">
         <form action="" method="POST">
             {% csrf_token %} {{ log_form }}
-            <button class="inputtog" type="submit">Login &#129170;</button>
+            <button class="inputtog" type="submit">Login</button>
         </form>
     </div>
     <div id="signup-cont">
-        <p class="noacct-p">No account?</p> <a class="searchbtnjs" href="{% url 'dream_users:signup' %}">Sign up &#129170;</a>
+        <p class="noacct-p">No account?</p> <a class="searchbtnjs" href="{% url 'dream_users:signup' %}">Sign up</a>
     </div>
 
     <script>
