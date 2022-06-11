@@ -38,7 +38,6 @@ Extra
 - [x] Create function to add to favorites list
 - [x] Allow user to remove from favorites list
 - [x] Extract extra data such as HD/4K status, Trailer
-- [ ] Add bio section to profile page
 - [x] Add custom PFP to profile page
 #### Week 3:
 Finalizations
@@ -47,4 +46,4 @@ Finalizations
 - [x] Add popular movie titles to app home page
 - [x] Footer
 - [x] Desktop responsive
-- [ ] Deploy app
+- [x] Deploy app
