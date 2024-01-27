@@ -1,5 +1,6 @@
 # DreamStream Search
-[Visit the final product! >](https://dream-stream-gage.herokuapp.com/)
+Project is not currently deployed.
+
 #### PDX CodeGuild Capstone Project by Gage Lieble
 > Search for your favorite movies and find the best price.
 ## Project Outline
@@ -47,4 +48,4 @@ Finalizations
 - [x] Add popular movie titles to app home page
 - [x] Footer
 - [x] Desktop responsive
-- [x] Deploy app
+- [ ] Deploy app
